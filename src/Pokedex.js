@@ -16,10 +16,14 @@ const types = [
 const Pokedex = ({onClick}) => {
   const [pokemonList, setPokemonList] = useState([]);
 
-  useEffect(() => {
-    fetch('https://pokeapi.co/api/v2/pokemon?limit=5')
+  const fetchAll = () => {
+    fetch('https://pokeapi.co/api/v2/pokemon?limit=151')
       .then(response => response.json())
       .then(json => setPokemonList(json.results))
+  }
+
+  useEffect(() => {
+    fetchAll();
   }, [setPokemonList])
 
   const typeOptions = (types) => {
@@ -29,9 +33,7 @@ const Pokedex = ({onClick}) => {
   const selectedType = (event) => {
     console.log(event.target.value);
     if(event.target.value === "all") {
-      fetch('https://pokeapi.co/api/v2/pokemon?limit=5')
-        .then(response => response.json())
-        .then(json => setPokemonList(json.results))
+      fetchAll();
     } else {
       const typeUrl = `https://pokeapi.co/api/v2/type/${event.target.value}`;
       fetch(typeUrl)

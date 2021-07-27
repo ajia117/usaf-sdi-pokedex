@@ -3,7 +3,7 @@
 const About = () => {
   return (
     <div>
-      Placeholder
+      Made with love by Jordan Tackett and Andre Jia.
     </div>
   )
 }
