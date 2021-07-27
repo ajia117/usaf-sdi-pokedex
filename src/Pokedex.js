@@ -13,7 +13,7 @@ const types = [
 ]
 
 
-const Pokedex = () => {
+const Pokedex = ({onClick}) => {
   const [pokemonList, setPokemonList] = useState([]);
 
   useEffect(() => {
@@ -23,7 +23,7 @@ const Pokedex = () => {
   }, [setPokemonList])
 
   const typeOptions = (types) => {
-    return types.map(type => <option value ={type}>{type}</option>)
+    return types.map(type => <option key={type} value ={type}>{type}</option>)
   }
 
   const selectedType = (event) => {
@@ -43,11 +43,20 @@ const Pokedex = () => {
     }
   }
 
+  const pokemonItem = (name, imageUrl) => {
+    return (
+      <li key={name} onClick={onClick}>
+        <img src={imageUrl} alt={name}></img> 
+        {name}
+      </li>
+    )
+  }
+
   return (
     <div>
-      <label for='type'>Filter By Type </label>
+      <label htmlFor='type'>Filter By Type</label>
       <select name='type' id='type' onChange={selectedType}>
-        <option value="all">All</option>
+        <option key='all' value="all">All</option>
         {typeOptions(types)}
       </select>
 
@@ -57,21 +66,11 @@ const Pokedex = () => {
             const url = pokemon.url
             const id = url.slice(34,-1)
             const imageURL= `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`
-            return <Pokemon name={pokemon.name} imageUrl={imageURL} />
+            return pokemonItem(pokemon.name, imageURL)
           })
         }
       </ul>
     </div>
-  )
-}
-
-const Pokemon = ({name, imageUrl}) => {
-  
-  return (
-    <li key={name}>
-      <img src={imageUrl} alt={name + " image"}></img> 
-      {name}
-    </li>
   )
 }
 
