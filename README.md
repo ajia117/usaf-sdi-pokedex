@@ -68,3 +68,17 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+
+# Layout of site according to user stories
+
+Home- displays list of pokemon with picture & name
+ - links to About and individual pokemon
+ - picture and name of every pokemon
+ - drop-down filter for filtering pokemon
+About- info about us
+Individual Pokemon- initially displays abilities before toggling to environment
+ - links to About and Home
+ - toggle between abilities and environment
+ - abilities info
+ - envirnoment info
