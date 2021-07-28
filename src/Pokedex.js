@@ -1,4 +1,5 @@
 import {useState, useEffect} from "react";
+import {Link} from "react-router-dom";
 
 /**
  * /usaf-sdi-pokedex/node_modules/pokemon-sprites/sprites/pokemon
@@ -13,7 +14,7 @@ const types = [
 ]
 
 
-const Pokedex = ({onClick}) => {
+const Pokedex = () => {
   const [pokemonList, setPokemonList] = useState([]);
 
   const fetchAll = () => {
@@ -45,12 +46,16 @@ const Pokedex = ({onClick}) => {
     }
   }
 
+  //onClick = (event) => console.log("clicked a pokemon: ", event);
+
   const pokemonItem = (name, imageUrl) => {
     return (
-      <li key={name} onClick={onClick}>
-        <img src={imageUrl} alt={name}></img> 
-        {name}
-      </li>
+        <Link to={`/pokemon/${name}`} key={name}>
+          <li>
+            <img src={imageUrl} alt={name}></img> 
+            {name}
+          </li>
+        </Link>
     )
   }
 
