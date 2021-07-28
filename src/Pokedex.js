@@ -61,13 +61,15 @@ const Pokedex = () => {
 
   return (
     <div>
-      <label htmlFor='type'>Filter By Type</label>
-      <select name='type' id='type' onChange={selectedType}>
-        <option key='all' value="all">All</option>
-        {typeOptions(types)}
-      </select>
+      <div className='input-field row'>
+        
+        <select className='browser-default' onChange={selectedType}>
+          <option key='all' value="all">Filter By Type</option>
+          {typeOptions(types)}
+        </select>
+      </div>
 
-      <ul>
+      <ul className='row'>
         {
           pokemonList.map((pokemon) => {
             const url = pokemon.url

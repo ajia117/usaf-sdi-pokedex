@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react";
+import {Link} from "react-router-dom";
 
-const Pokemon = ({name}) => {
+const Pokemon = ({name, page}) => {
   const [currentPoke, setCurrentPoke] = useState({
     abilities: [],
     moves: []
   });
-  const [abilitiesView, changeView] = useState(true);
+  
 
 
   useEffect(() => {
@@ -19,21 +20,9 @@ const Pokemon = ({name}) => {
         })
       })
   }, [setCurrentPoke])
-
   
-  const presentPoke = () => {
-    if (abilitiesView) {
-      return (
-        <div>
-          <h3>Abilities</h3>
-          <ul name='abilities' id='abilities'>
-            {currentPoke.abilities.map(({ability}) => <li key={ability.name}>{ability.name}</li>) }
-          </ul>
-        </div>
-        
-        
-      )
-    } else {
+  const PresentPoke = () => {
+    if (page === 'moves') {
       return (
         <div>
           <h3>Moves</h3>
@@ -41,14 +30,31 @@ const Pokemon = ({name}) => {
             {currentPoke.moves.map(({move}) => <li key={move.name}>{move.name}</li>) }
           </ul>
         </div>
+      )
+    } else {
+      return (
+        <div>
+          <h3>Abilities</h3>
+          <ul name='abilities' id='abilities'>
+            {currentPoke.abilities.map(({ability}) => <li key={ability.name}>{ability.name}</li>) }
+          </ul>
+        </div>
+       
       ) 
+    }
+  }
+  const changePage = () => {
+    if(page === 'moves') {
+      return `/pokemon/${name}/abilities`;
+    } else {
+      return `/pokemon/${name}/moves`;
     }
   }
   
   return (
     <div>
-      <button onClick={() => changeView(!abilitiesView)}>Switch View</button>
-      {presentPoke()}
+      <Link to={changePage}>Change View</Link>
+      <PresentPoke />
     </div>
   )
 }

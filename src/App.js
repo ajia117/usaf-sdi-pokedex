@@ -1,14 +1,15 @@
 import {Children, useState} from "react";
 import {
-  BrowserRouter as Router,
-  Switch,
+  Redirect,
   Route,
-  Link
+  Link,
+  Switch
 } from 'react-router-dom'
 
 import Pokedex from './Pokedex';
 import About from './About';
 import Pokemon from './Pokemon';
+import FourOhFour from './FourOhFour';
 
 import './App.css';
 
@@ -16,27 +17,35 @@ function App() {
 
   return (
     <div className="App">
-        <header className="App-header">SDI POKEDEX
-          <Link to="/about">About</Link>
-          <Link to="/">Home</Link>
-        </header>
-        <div className='content'>
-          
+      <header className="App-header">SDI POKEDEX
+        <Link to="/about">About</Link>
+        <Link to="/">Home</Link>
+      </header>
+      <div className='content'>
+        <Switch>
           <Route exact path="/">
             <Pokedex />
           </Route>
           <Route exact path="/about"> 
             <About/>
           </Route>
-          <Route path={`/pokemon/:name`} children={
+          <Route path={`/pokemon/:name/:page?`} children={
             ({match}) => {
               if(match) {
-                return <Pokemon name={match.params.name} />
+                console.log(match.params);
+                return <Pokemon name={match.params.name} page={match.params.page}/>
+              } else {
+                alert("This page doesn't exist")
+                return null;
               }
             }
           }>
           </Route>
-        </div>
+          <Route exact path='/oops'>
+            <FourOhFour />
+          </Route>
+        </Switch>
+      </div>
     </div>
   );
 }
