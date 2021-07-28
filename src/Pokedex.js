@@ -52,9 +52,12 @@ const Pokedex = () => {
     return (
         <Link to={`/pokemon/${name}`} key={name}>
           <li>
-            <img src={imageUrl} alt={name}></img> 
-            {name}
+            <img className="row" src={imageUrl} alt={name}></img> 
+            <div className="row">
+              {name}
+            </div>
           </li>
+          <div className="divider"></div>
         </Link>
     )
   }

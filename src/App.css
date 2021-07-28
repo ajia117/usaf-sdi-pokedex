@@ -31,8 +31,12 @@
 ul {
   list-style-type: none;
 }
+li {
+  width: fit-content;
+  margin: auto;
+}
 
-select {
+select, .divider {
   width: 50%;
   margin: auto;
 }
